@@ -1,0 +1,47 @@
+<html lang="en-us" ng-app="CurrencyApp">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="UTF-8">
+        
+        <title>World's best currency converter app</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <style>
+            html, body
+            {
+                font-size: 1.1em;
+            }
+        </style>
+        
+        <script src="//code.angularjs.org/1.3.0-beta.10/angular.min.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+        <script src=" http://openexchangerates.github.io/money.js/money.js"></script>
+       
+        <script src="app.js"></script>
+    </head>
+    <body>
+        <form name="userForm">   
+            <div class = "panel panel-default">
+                
+                <div ng-controller="mainController" class="form-inline panel-body">
+                    <div ng-class="{ 'has-error': userForm.fromamount.$invalid && userForm.fromamount.$dirty }" class="form-group">
+                        <input class="form-control" type=text name='fromamount' id='fromamount' ng-model='fromAmount' ng-change="update();" placeholder="Amount" required >
+                    </div>
+                    <div ng-class="{ 'has-error': userForm.fromCurrency.$invalid && userForm.fromCurrency.$dirty }" class="form-group">
+                        <select class="form-control" name="fromCurrency" id="fromCurrency" ng-model="fromCurrency" ng-change="update();" required >
+                            <option ng-repeat="currency in currencies" value="{{currency.name}}">{{currency.display}}</option>
+                        </select>
+                    </div>
+                    <div ng-class="{ 'has-error': userForm.tocurrency.$invalid && userForm.tocurrency.$dirty }" class="form-group">
+                         Equals {{toAmount | number:4}}
+                        <select class="form-control" name="tocurrency" id="tocurrency" ng-model="toCurrency" ng-change="update();" required >
+                            <option ng-repeat="currency in currencies" value="{{currency.name}}">{{currency.display}}</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
